@@ -15,11 +15,25 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
 Route::group(['namespace' => 'Blog', 'prefix' => 'blog'], function () {
    Route::resource('posts', 'PostController')->names('blog.posts');
 });
 
-//Route::resource('rest', 'RestTestController')->names('restTest');
-Auth::routes();
+// Blog admin
+$groupData = [
+    'namespace' => 'Blog\Admin',
+    'prefix'    => 'admin/blog',
+];
+Route::group($groupData, function () {
+    // BlogCategory
+    $methods = ['index', 'edit', 'update', 'create', 'store'];
+    Route::resource('categories', 'CategoryController')
+        ->only($methods)
+        ->names('blog.admin.categories');
+});
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::resource('rest', 'RestTestController')->names('restTest');
