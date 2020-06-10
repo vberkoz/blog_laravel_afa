@@ -64,16 +64,25 @@ class CategoryController extends BaseController
     public function update(Request $request, $id)
     {
         $item = BlogCategory::find($id);
-        if (empty($item)) return back()->withErrors(['msg' => "Record id=[{$id}] not found"])->withInput();
+        if (empty($item)) {
+            return back()
+                ->withErrors(['msg' => "Record id=[{$id}] not found"])
+                ->withInput();
+        }
 
         $data = $request->all();
-        $result = $item->fill($data)->save();
+        $result = $item
+            ->fill($data)
+            ->save();
 
         if ($result) {
-            return redirect()->route('blog.admin.categories.edit', $item->id)
+            return redirect()
+                ->route('blog.admin.categories.edit', $item->id)
                 ->with(['success' => 'Successfuly saved']);
         } else {
-            return back()->withErrors(['msg' => 'Failed to save'])->withInput();
+            return back()
+                ->withErrors(['msg' => 'Failed to save'])
+                ->withInput();
         }
     }
 }

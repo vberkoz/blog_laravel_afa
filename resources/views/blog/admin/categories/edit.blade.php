@@ -18,7 +18,7 @@
                                     </svg>
                                 </span>
                             </button>
-                            {!! dd($errors->all(':message')) !!}
+                            {{ $errors->first() }}
                         </div>
                     </div>
                 </div>
