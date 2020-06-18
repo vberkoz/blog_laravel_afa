@@ -6,7 +6,7 @@
         @method('PATCH')
         @csrf
         <div class="container">
-            @php /** \Illuminate\Support\ViewError @errors */ @endphp
+            @php /** \Illuminate\Support\ViewErrorBag @errors */ @endphp
             @if($errors->any())
                 <div class="row justify-content-center">
                     <div class="col-md-11">
